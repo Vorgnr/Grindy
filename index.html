@@ -1,71 +1,10 @@
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
 </head>
 <body>
-
-    <div>
-      <canvas></canvas>
-    </div>
-
-    <!-- <script>
-      $(function() {
-        var intervalID;
-        var score = 0;
-        var clickPower = 1;
-        var exp_in_current_level = 0;
-        var level = 0;
-        var spanLevel = $("#spanLevel");
-        var progressBar = $('.progress-bar');
-
-        var exp_requirement = function(lvl) {
-          return Math.round((lvl + Math.log2(lvl)) * 100)
-        }
-
-        var exp_to_levelup = exp_requirement(level);
-        progressBar.width((exp_in_current_level / exp_to_levelup * 100) + "%");
-
-        var click = function() {
-          $("#clicker").click();
-        }
-
-        $("#clicker").click(function() {
-          score += clickPower;
-          exp_in_current_level += clickPower;
-
-          progressBar.width((exp_in_current_level / exp_to_levelup * 100) + "%");
-          $('#clickCount').html(score);
-
-          if (exp_in_current_level >= exp_to_levelup) {
-            levelup();
-          }
-
-        })
-
-        $("#autoclick").click(function() {
-           intervalID = setInterval(logic, 50);
-        });
-
-        var levelup = function() {
-          exp_in_current_level = 0;
-          level++;
-          exp_to_levelup = exp_requirement(level)
-          spanLevel.html(level);
-          progressBar.width("0%");
-        }
-
-        levelup();
-
-        var logic = function() {
-            click()
-        }
-
-        $("#stopautoclick").click(function() {
-          clearInterval(intervalID);
-        });
-      })
-    </script> -->
     <script src="bundle.js"></script>
 </body>
 </html>
