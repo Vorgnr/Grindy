@@ -1,1 +1,74 @@
+$game-layer-height: 80vh;
+$hud-container-height: 18vh;
+$experience-bar-height: 2vh;
 
+$hit-points-width: 20%;
+
+$full-view-with: 100vw;
+$skills-container-width: 60%;
+$debug-color: #A4D9EB;
+
+$experience-bar-color: green;
+
+$full: 100%;
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: $full;
+  height: $full;
+}
+
+canvas {
+  display:block;
+}
+
+.game-layer {
+  width: $full-view-with;
+  height: $game-layer-height;
+  background-color: $debug-color;
+}
+
+.hud-container {
+  height: $hud-container-height;
+
+  .hit-points {
+    width: $hit-points-width;
+    float: left;
+    height: $full;
+
+    .life {
+      height: $full;
+      width: 50%;
+      float: left;
+      background-color: red;
+    }
+
+    .mana {
+      height: $full;
+      width: 50%;
+      float: left;
+      background-color: blue;
+    }
+  }
+
+  .skills-container {
+    width: $skills-container-width;
+    height: $full;
+    float: left;
+    background-color: black;
+  }
+
+  .side-menu {
+    width: $hit-points-width;
+    float: left;
+    height: $full;
+    background-color: grey;
+  }
+}
+
+.experience-bar {
+  width: $full-view-with;
+  height: $experience-bar-height;
+  background-color: $experience-bar-color;
+}
