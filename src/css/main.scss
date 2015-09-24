@@ -17,6 +17,7 @@ html, body {
   padding: 0;
   width: $full;
   height: $full;
+  background-color: $debug-color;
 }
 
 canvas {
@@ -26,7 +27,6 @@ canvas {
 .game-layer {
   width: $full-view-with;
   height: $game-layer-height;
-  background-color: $debug-color;
 }
 
 .hud-container {
