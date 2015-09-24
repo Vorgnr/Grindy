@@ -1,5 +1,6 @@
 import Hero from './hero.js'
 import Monster from './monster.js'
+import Logger from './logger.js'
 import Rx from 'rx'
 
 const round = (fight, monster) => {
@@ -11,8 +12,8 @@ const round = (fight, monster) => {
 }
 
 export default () => {
+  const logger = Logger()
   const player = Hero()
-  const gameLayerElement = document.querySelector('.game-layer')
   const spawnButton = document.querySelector('#spawn-monster')
   const monsters = Rx.Observable.fromEvent(spawnButton, 'click')
 
@@ -22,28 +23,28 @@ export default () => {
       () => round(fight, monster),
       player.as() * 1000
     )
-    gameLayerElement.innerHTML = ''
-    gameLayerElement.innerHTML += '<p><strong>Fight!</strong></p>'
+
+    logger.log('Fight')
 
     return () => {
       clearInterval(rounds)
     }
   }).doOnCompleted(
-    () => gameLayerElement.innerHTML += '<p><strong>You defeated, Hurrah for loots!</strong></p>'
+    () => logger.log('You defeated, Hurrah for loots!')
   )
 
   const game = monsters
     .startWith('startup click')
-    .flatMap(monster => fight)
+    .flatMap(() => fight)
 
   const gameSubscribe = game.subscribe(
     (monster) => {
-      gameLayerElement.innerHTML += `<p>Player attack for: ${player.damage()}</p>`
+      logger.log(`Player attack for: ${player.damage()}`)
       monster.receive_attack(player.damage())
-      gameLayerElement.innerHTML += `<p>Monster life left: ${monster.current_life()}</p>`
+      logger.log(`Monster life left: ${monster.current_life()}`)
     },
-    err => console.error('Error: %s', err),
-    () => console.log('End of the game Bobby')
+    err => logger.error(`Error: ${err}`),
+    () => logger.log('End of the game Bobby')
   )
 
   return {
