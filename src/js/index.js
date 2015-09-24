@@ -1,10 +1,8 @@
-require('../css/main.scss');
+import '../css/main.scss'
+import 'file?name=[name].html!../index.html'
+import Grindy from './grindy.js'
 
-import grindy from "./grindy.js"
-
-(function() {
-
-  let game = grindy();
-  game.start();
-
+(() => {
+  const game = Grindy()
+  game.start()
 })()
