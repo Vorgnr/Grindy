@@ -4,8 +4,9 @@
   "description": "HTML5 Auto clicker RPG",
   "main": "app.js",
   "scripts": {
-    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/babel-node test/index.js | ./node_modules/.bin/faucet",
-    "dev": "./node_modules/.bin/webpack --progress --colors --watch"
+    "test": "istanbul cover babel-node test/index.js | faucet",
+    "dev": "webpack --progress --colors --watch",
+    "start": "webpack-dev-server --hot --inline"
   },
   "author": "vorgnr",
   "license": "MIT",
@@ -27,6 +28,7 @@
     "sass-loader": "^2.0.1",
     "style-loader": "^0.12.4",
     "tape": "^4.2.0",
-    "webpack": "^1.12.2"
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.11.0"
   }
 }
