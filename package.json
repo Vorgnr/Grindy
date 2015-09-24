@@ -2,16 +2,14 @@
   "name": "Grindy",
   "version": "1.0.0",
   "description": "HTML5 Auto clicker RPG",
-  "main": "app.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "istanbul cover babel-node test/index.js | faucet",
-    "dev": "webpack --progress --colors --watch",
     "start": "webpack-dev-server --hot --inline"
   },
   "author": "vorgnr",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.13.3",
     "rx": "^3.1.2"
   },
   "devDependencies": {
@@ -20,8 +18,6 @@
     "babel-eslint": "^4.1.3",
     "babel-loader": "^5.3.2",
     "css-loader": "^0.19.0",
-    "eslint": "^1.5.0",
-    "eslint-loader": "^1.0.0",
     "faucet": "0.0.1",
     "file-loader": "^0.8.4",
     "istanbul": "^0.3.20",
