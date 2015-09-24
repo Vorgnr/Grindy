@@ -1,7 +1,9 @@
-import hero from "./hero.js"
-import monster from "./monster.js"
+import Hero from './hero.js'
+import Monster from './monster.js'
+import Rx from 'rx'
 
-const grindy = () => {
+export default () => {
+  const player = Hero()
 
   let current_player = hero();
 
@@ -12,5 +14,3 @@ const grindy = () => {
     }
   }
 }
-
-export default grindy;
