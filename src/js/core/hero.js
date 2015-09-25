@@ -28,8 +28,7 @@ export default () => {
         (err) => Logger.error(err),
         () => currentFight.onCompleted()
       )
-    }
-
+  }
 
   const gainRewards = (rewards) => {
     state.exp += rewards.exp
@@ -39,5 +38,5 @@ export default () => {
     Logger.log(`New gold value ${state.chest.gold}`)
   }
 
-  return { hitTillDeath, gainRewards }
+  return { hitTillDeath, gainRewards, state }
 }
