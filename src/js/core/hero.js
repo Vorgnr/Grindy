@@ -14,23 +14,22 @@ export default () => {
     }
   }
 
-  const fight = (target) => {
-    return Rx.Observable.create((f) => {
-      Rx.Observable
-        .interval(attackSpeed / state.ias)
-        .takeWhile(() => !target.isDead())
-        .subscribe(
-          (x) => {
-            Logger.log(`hit monster for ${damage} damage.`)
-            target.receiveAttack(damage)
-            Logger.log(`monster life's : ${target.currentLife()} hp.`)
-            f.onNext()
-          },
-          (err) => Logger.error(err),
-          () => f.onCompleted()
-        )
-    })
-  }
+  const hitTillDeath = (currentFight, target) => {
+    return Rx.Observable
+      .interval(attackSpeed / state.ias)
+      .takeWhile(() => !target.isDead())
+      .subscribe(
+        () => {
+          Logger.log(`hit monster for ${damage} damage.`)
+          target.receiveAttack(damage)
+          Logger.log(`monster life's : ${target.currentLife()} hp.`)
+          currentFight.onNext()
+        },
+        (err) => Logger.error(err),
+        () => currentFight.onCompleted()
+      )
+    }
+
 
   const gainRewards = (rewards) => {
     state.exp += rewards.exp
@@ -40,5 +39,5 @@ export default () => {
     Logger.log(`New gold value ${state.chest.gold}`)
   }
 
-  return { fight, gainRewards }
+  return { hitTillDeath, gainRewards }
 }
