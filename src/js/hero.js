@@ -11,6 +11,24 @@ export default () => {
     items: []
   }
 
+  const fight = (target) => {
+    return Rx.Observable.create((f) => {
+      const hits = Rx.Observable.interval(attackSpeed * 1000)
+        .takeWhile(() => !target.isDead())
+
+      hits.subscribe(
+        (x) => {
+          logger.log(`hit monster for ${damage} damage.`)
+          target.receiveAttack(damage)
+          logger.log(`monster life's : ${target.currentLife()} hp.`)
+          f.onNext()
+        },
+        (err) => Logger.error(err),
+        () => f.onCompleted()
+      )
+    })
+  }
+
   const grantRewards = (reward) => {
     exp += reward.exp
     chest.gold += reward.chest.gold
@@ -20,6 +38,7 @@ export default () => {
   }
 
   return {
+    fight,
     damage: () => damage,
     as: () => attackSpeed,
     grantRewards: grantRewards

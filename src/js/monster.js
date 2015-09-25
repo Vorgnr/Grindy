@@ -7,8 +7,8 @@ export default () => {
   }
 
   return {
-    current_life: () => life,
-    receive_attack: (damage) => life -= damage,
+    currentLife: () => life,
+    receiveAttack: (damage) => life -= damage,
     isDead: () => life <= 0,
     reward: () => {
       return { exp, chest }
