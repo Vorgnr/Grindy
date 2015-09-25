@@ -1,4 +1,4 @@
-export default (exp = 1, chest = { gold: 5, items: []} ) => {
+export default (exp = 1, chest = { gold: 5, items: [] }) => {
   const rewards = { exp, chest }
 
   let state = {
