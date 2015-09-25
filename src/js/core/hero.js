@@ -1,5 +1,5 @@
-import Logger from '../utils/logger.js'
 import Rx from 'rx'
+import Logger from '../utils/logger.js'
 
 export default () => {
   const damage = 1

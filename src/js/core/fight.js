@@ -1,3 +1,4 @@
+import Rx from 'rx'
 import Logger from '../utils/logger.js'
 
 export default (player, monster) => {
