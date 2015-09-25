@@ -24,3 +24,29 @@ test('gainRewards adds the rewards to the hero state', (assert) => {
   assert.equal(actual, expected)
   assert.end()
 })
+
+test('gainExp adds the exp to the hero', (assert) => {
+  const hero = Hero()
+  const expBonus = 150
+  const expected = Object.assign(hero.state, {
+    exp: expBonus
+  })
+
+  hero.gainExp(expBonus)
+  const actual = hero.state
+
+  assert.equal(actual, expected)
+  assert.end()
+})
+
+test('gainExp should keep overflown exp', (assert) => {
+  const hero = Hero()
+  const expBonus = 150
+  const expected = 50
+
+  hero.gainExp(expBonus)
+  const actual = hero.state.expEarnedInLevel
+
+  assert.equal(actual, expected)
+  assert.end()
+})
