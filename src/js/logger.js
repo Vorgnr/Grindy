@@ -1,4 +1,4 @@
-export default () => {
+const Logger = () => {
   return {
     log: (str) => {
       console.log(str)
@@ -8,3 +8,5 @@ export default () => {
     }
   }
 }
+
+export default Logger()
