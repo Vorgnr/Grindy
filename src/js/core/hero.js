@@ -5,6 +5,17 @@ export default () => {
   let damage = 1
   const attackSpeed = 1 * 1000
 
+  let state = {
+    level: 1,
+    ias: 4,
+    exp: 0,
+    expEarnedInLevel: 0,
+    chest: {
+      gold: 0,
+      items: []
+    }
+  }
+
   const expRequired = (level) => Math.round(Math.log2(level) * 100) + 100
 
   const gainExp = (exp) => {
@@ -23,17 +34,6 @@ export default () => {
     state.level += 1
     damage += 1
     Logger.log(`gz you are level ${state.level}`)
-  }
-
-  let state = {
-    level: 1,
-    ias: 4,
-    exp: 0,
-    expEarnedInLevel: 0,
-    chest: {
-      gold: 0,
-      items: []
-    }
   }
 
   const hitTillDeath = (target) => {
