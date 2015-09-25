@@ -14,20 +14,16 @@ export default () => {
     }
   }
 
-  const hitTillDeath = (currentFight, target) => {
+  const hitTillDeath = (target) => {
     return Rx.Observable
       .interval(attackSpeed / state.ias)
       .takeWhile(() => !target.isDead())
-      .subscribe(
-        () => {
-          Logger.log(`hit monster for ${damage} damage.`)
-          target.receiveAttack(damage)
-          Logger.log(`monster life's : ${target.currentLife()} hp.`)
-          currentFight.onNext()
-        },
-        (err) => Logger.error(err),
-        () => currentFight.onCompleted()
-      )
+  }
+
+  const hit = (target) => {
+    Logger.log(`hit monster for ${damage} damage.`)
+    target.receiveAttack(damage)
+    Logger.log(`monster life's : ${target.currentLife()} hp.`)
   }
 
   const gainRewards = (rewards) => {
@@ -38,5 +34,5 @@ export default () => {
     Logger.log(`New gold value ${state.chest.gold}`)
   }
 
-  return { hitTillDeath, gainRewards, state }
+  return { hitTillDeath, gainRewards, state, hit }
 }

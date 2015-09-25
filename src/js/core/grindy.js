@@ -1,15 +1,19 @@
 import Hero from './hero.js'
 import Monster from './monster.js'
 import Fight from './fight.js'
+import Rx from 'rx'
 
 export default () => {
+  const spawnButton = document.querySelector('#spawn-monster')
+  const clicks = Rx.Observable.fromEvent(spawnButton, 'click')
   const player = Hero()
-  const monster = Monster()
-  const fight = Fight(player, monster)
+  let fight = Fight(player, Monster())
 
   return {
     start: () => {
-      fight.start()
+      clicks
+        .map(() => fight.start())
+        .subscribe(() => fight = Fight(player, Monster()))
     }
   }
 }
