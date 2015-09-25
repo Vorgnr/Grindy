@@ -15,7 +15,7 @@ export default (player, monster) => {
 
   const playerWins = () => {
     Logger.log('player wins')
-    player.grantRewards(monster.reward())
+    player.gainRewards(monster.rewards)
   }
 
   return { start }

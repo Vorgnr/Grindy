@@ -3,17 +3,21 @@ import Rx from 'rx'
 
 export default () => {
   const damage = 1
-  const attackSpeed = 0.5
-  let exp = 0
-  let chest = {
-    gold: 0,
-    items: []
+  const attackSpeed = 1 * 1000
+
+  let state = {
+    ias: 4,
+    exp: 0,
+    chest: {
+      gold: 0,
+      items: []
+    }
   }
 
   const fight = (target) => {
     return Rx.Observable.create((f) => {
       Rx.Observable
-        .interval(attackSpeed * 1000)
+        .interval(attackSpeed / state.ias)
         .takeWhile(() => !target.isDead())
         .subscribe(
           (x) => {
@@ -28,18 +32,13 @@ export default () => {
     })
   }
 
-  const grantRewards = (reward) => {
-    exp += reward.exp
-    chest.gold += reward.chest.gold
-    chest.items.concat(reward.chest.items)
+  const gainRewards = (rewards) => {
+    state.exp += rewards.exp
+    state.chest.gold += rewards.chest.gold
+    state.chest.items.concat(rewards.chest.items)
 
-    Logger.log(`New gold value ${chest.gold}`)
+    Logger.log(`New gold value ${state.chest.gold}`)
   }
 
-  return {
-    fight,
-    damage: () => damage,
-    as: () => attackSpeed,
-    grantRewards: grantRewards
-  }
+  return { fight, gainRewards }
 }

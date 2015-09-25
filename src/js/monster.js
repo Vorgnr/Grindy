@@ -1,17 +1,14 @@
-export default () => {
-  let life = 5
-  let exp: 1
-  const chest = {
-    gold: 5,
-    items: []
+export default (exp = 1, chest = { gold: 5, items: []} ) => {
+  const rewards = { exp, chest }
+
+  let state = {
+    life: 5
   }
 
   return {
-    currentLife: () => life,
-    receiveAttack: (damage) => life -= damage,
-    isDead: () => life <= 0,
-    reward: () => {
-      return { exp, chest }
-    }
+    currentLife: () => state.life,
+    receiveAttack: (damage) => state.life -= damage,
+    isDead: () => state.life <= 0,
+    rewards
   }
 }
