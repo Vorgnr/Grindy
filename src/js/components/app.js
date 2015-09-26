@@ -6,10 +6,11 @@ export class Grindy extends React.Component {
   render () {
     return (
       <div>
-        <div className='game-layer'>Hello World</div>
-        <button type='button' name='spawn-monster' id='spawn-monster'>
-          Spawn Bad Guy
-        </button>
+        <div className='game-layer'>
+          <button type='button' name='spawn-monster' id='spawn-monster'>
+            Spawn Bad Guy
+          </button>
+        </div>
         <Menu />
       </div>
     )
