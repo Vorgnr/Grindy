@@ -31,8 +31,8 @@ export default () => {
   }
 
   const levelUp = () => {
-    state.level += 1
-    damage += 1
+    state.level++
+    damage++
     Logger.log(`gz you are level ${state.level}`)
   }
 
