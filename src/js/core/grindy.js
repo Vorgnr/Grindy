@@ -13,9 +13,7 @@ export default () => {
     start: () => {
       clicks
         .map(() => fight.start(player, Monster(player.state.level)))
-        .subscribe(() => {
-          fight = Fight()
-        })
+        .subscribe(() => fight = Fight())
     }
   }
 }
