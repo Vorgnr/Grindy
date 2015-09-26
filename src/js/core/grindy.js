@@ -7,13 +7,13 @@ export default () => {
   const spawnButton = document.querySelector('#spawn-monster')
   const clicks = Rx.Observable.fromEvent(spawnButton, 'click')
   const player = Hero()
-  let fight = Fight(player, Monster())
+  let fight = Fight()
 
   return {
     start: () => {
       clicks
-        .map(() => fight.start())
-        .subscribe(() => fight = Fight(player, Monster()))
+        .map(() => fight.start(player, Monster(player.state.level)))
+        .subscribe(() => fight = Fight())
     }
   }
 }

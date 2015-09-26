@@ -2,16 +2,38 @@ import Rx from 'rx'
 import Logger from '../utils/logger.js'
 
 export default () => {
-  const damage = 1
+  let damage = 1
   const attackSpeed = 1 * 1000
 
   let state = {
+    level: 1,
     ias: 4,
     exp: 0,
+    expEarnedInLevel: 0,
     chest: {
       gold: 0,
       items: []
     }
+  }
+
+  const expRequired = (level) => Math.round(Math.log2(level) * 100) + 100
+
+  const gainExp = (exp) => {
+    state.exp += exp
+    let expToLevelUp = expRequired(state.level)
+    let expOverFlow = expToLevelUp - state.expEarnedInLevel - exp
+    if (expOverFlow <= 0) {
+      levelUp()
+      state.expEarnedInLevel = Math.abs(expOverFlow)
+    } else {
+      state.expEarnedInLevel += exp
+    }
+  }
+
+  const levelUp = () => {
+    state.level++
+    damage++
+    Logger.log(`gz you are level ${state.level}`)
   }
 
   const hitTillDeath = (target) => {
@@ -27,12 +49,12 @@ export default () => {
   }
 
   const gainRewards = (rewards) => {
-    state.exp += rewards.exp
+    gainExp(rewards.exp)
     state.chest.gold += rewards.chest.gold
     state.chest.items.concat(rewards.chest.items)
 
     Logger.log(`New gold value ${state.chest.gold}`)
   }
 
-  return { hitTillDeath, gainRewards, state, hit }
+  return { hitTillDeath, gainRewards, state, hit, gainExp }
 }

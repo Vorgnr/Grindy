@@ -1,17 +1,15 @@
 import Logger from '../utils/logger.js'
 
-export default (player, monster) => {
-  const start = () => {
+export default () => {
+  const start = (player, monster) => {
     player.hitTillDeath(monster).subscribe(
       () => { player.hit(monster) },
       (err) => console.log(err),
-      playerWins
+      () => {
+        Logger.log('player wins')
+        player.gainRewards(monster.rewards)
+      }
     )
-  }
-
-  const playerWins = () => {
-    Logger.log('player wins')
-    player.gainRewards(monster.rewards)
   }
 
   return { start }
