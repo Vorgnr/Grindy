@@ -1,13 +1,17 @@
-export default (level = 1, chest = { gold: 5, items: [] }) => {
-  const rewards = { exp: 50, chest }
+import LootHoarder from './lootHoarder.js'
 
+export default (level = 1) => {
   let state = {
     level,
     life: 5
+  }
+  const rewards = {
+    exp: 50,
+    chest: LootHoarder.getChestForMonster(state.level)
   };
 
   ((lvl) => {
-    const scaleValue = (value) => value *= Math.round(Math.pow(1.35, lvl))
+    const scaleValue = (value) => Math.round(Math.pow(1.35, lvl) * value)
     state.life = scaleValue(state.life)
   })(level)
 
