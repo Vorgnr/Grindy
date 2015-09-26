@@ -6,33 +6,40 @@ export default () => {
   const attackSpeed = 1 * 1000
 
   let state = {
-    level: 1,
-    ias: 4,
+    ias: 100,
     exp: 0,
     expEarnedInLevel: 0,
+    expToLevelUp: 200,
     chest: {
       gold: 0,
       items: []
+    },
+    level: {
+      current: 1,
+      totalXp: 0,
+      currentXp: 0,
+      xpToLevelUp: 200,
+      totalXpToLevelUp: 200
     }
   }
 
-  const expRequired = (level) => Math.round(Math.log2(level) * 100) + 100
+  const expRequired = (level) => Math.pow(level + 1, 2.4) * 200
 
   const gainExp = (exp) => {
-    state.exp += exp
-    let expToLevelUp = expRequired(state.level)
-    let expOverFlow = expToLevelUp - state.expEarnedInLevel - exp
-    if (expOverFlow <= 0) {
+    state.level.totalXp += exp
+    if (state.level.totalXpToLevelUp <= state.level.totalXp) {
       levelUp()
-      state.expEarnedInLevel = Math.abs(expOverFlow)
+      state.level.currentXp = state.level.totalXp - state.level.totalXpToLevelUp
+      state.level.xpToLevelUp = expRequired(state.level.current) - state.level.totalXp
     } else {
-      state.expEarnedInLevel += exp
+      state.level.currentXp += exp
     }
   }
 
   const levelUp = () => {
-    state.level++
+    state.level.current++
     damage++
+    state.totalXpToLevelUp = expRequired(state.level)
     Logger.log(`gz you are level ${state.level}`)
   }
 

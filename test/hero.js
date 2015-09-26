@@ -11,7 +11,9 @@ test('gainRewards adds the rewards to the hero state', (assert) => {
     }
   }
   const expected = Object.assign(hero.state, {
-    exp: hero.exp + rewards.exp,
+    level: {
+      totalXp: hero.state.level.totalXp + rewards.exp
+    },
     chest: {
       gold: hero.state + rewards.chest.gold,
       items: hero.state.chest.items.concat(rewards.chest.items)
@@ -25,15 +27,42 @@ test('gainRewards adds the rewards to the hero state', (assert) => {
   assert.end()
 })
 
-test('gainExp adds the exp to the hero', (assert) => {
+test('gainExp update the totalXp value of the hero', (assert) => {
   const hero = Hero()
+  hero.state.level.totalXp = 100
   const expBonus = 150
-  const expected = Object.assign(hero.state, {
-    exp: expBonus
-  })
-
   hero.gainExp(expBonus)
-  const actual = hero.state
+
+  const actual = hero.state.level.totalXp
+  const expected = 250
+
+  assert.equal(actual, expected)
+  assert.end()
+})
+
+test('gainExp update the currentXp value of the hero', (assert) => {
+  const hero = Hero()
+  hero.state.level.currentXp = 0
+  const expBonus = 50
+  hero.gainExp(expBonus)
+
+  const actual = hero.state.level.currentXp
+  const expected = 50
+
+  assert.equal(actual, expected)
+  assert.end()
+})
+
+test('gainExp level up hero if hero exp is superior to hero expToLevelUp', (assert) => {
+  const hero = Hero()
+  hero.state.level.totalXpToLevelUp = 500
+  hero.state.level.totalXp = 400
+  hero.state.level.current = 5
+  const expBonus = 150
+  hero.gainExp(expBonus)
+
+  const actual = hero.state.level.current
+  const expected = 6
 
   assert.equal(actual, expected)
   assert.end()
@@ -41,11 +70,13 @@ test('gainExp adds the exp to the hero', (assert) => {
 
 test('gainExp should keep overflown exp', (assert) => {
   const hero = Hero()
+  hero.state.level.totalXpToLevelUp = 500
+  hero.state.level.totalXp = 400
   const expBonus = 150
-  const expected = 50
-
   hero.gainExp(expBonus)
-  const actual = hero.state.expEarnedInLevel
+
+  const expected = 50
+  const actual = hero.state.level.currentXp
 
   assert.equal(actual, expected)
   assert.end()
