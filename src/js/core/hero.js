@@ -1,51 +1,57 @@
 import Rx from 'rx'
 import Logger from '../utils/logger.js'
 
-export default () => {
+export default (state) => {
   let damage = 1
   const attackSpeed = 1 * 1000
 
-  let state = {
-    level: 1,
-    ias: 4,
-    exp: 0,
-    expEarnedInLevel: 0,
-    chest: {
-      gold: 0,
-      items: []
+  if (!state) {
+    state = {
+      ias: 10,
+      chest: {
+        gold: 0,
+        items: []
+      },
+      level: {
+        current: 1,
+        totalXp: 0,
+        currentXp: 0,
+        xpToLevelUp: 100,
+        totalXpToLevelUp: 100
+      }
     }
   }
 
-  const expRequired = (level) => Math.round(Math.log2(level) * 100) + 100
+  const expRequired = (level) => Math.pow(level, 2) * 100
 
   const gainExp = (exp) => {
-    state.exp += exp
-    let expToLevelUp = expRequired(state.level)
-    let expOverFlow = expToLevelUp - state.expEarnedInLevel - exp
-    if (expOverFlow <= 0) {
+    state.level.totalXp += exp
+    if (state.level.totalXpToLevelUp <= state.level.totalXp) {
+      state.level.currentXp = Math.abs(state.level.totalXpToLevelUp - state.level.totalXp)
       levelUp()
-      state.expEarnedInLevel = Math.abs(expOverFlow)
+      state.level.xpToLevelUp = expRequired(state.level.current) - state.level.totalXp
     } else {
-      state.expEarnedInLevel += exp
+      state.level.currentXp += exp
     }
   }
 
   const levelUp = () => {
-    state.level++
+    state.level.current++
     damage++
-    Logger.log(`gz you are level ${state.level}`)
+    state.level.totalXpToLevelUp = expRequired(state.level.current)
+    Logger.log(`gz you are level ${state.level.current}`)
   }
 
-  const hitTillDeath = (target) => {
+  const hitTillDeath = (monster) => {
     return Rx.Observable
       .interval(attackSpeed / state.ias)
-      .takeWhile(() => !target.isDead())
+      .takeWhile(() => !monster.isDead())
   }
 
-  const hit = (target) => {
+  const hit = (monster) => {
     Logger.log(`hit monster for ${damage} damage.`)
-    target.receiveAttack(damage)
-    Logger.log(`monster life's : ${target.currentLife()} hp.`)
+    monster.receiveAttack(damage)
+    Logger.log(`monster life's : ${monster.currentLife()} hp.`)
   }
 
   const gainRewards = (rewards) => {

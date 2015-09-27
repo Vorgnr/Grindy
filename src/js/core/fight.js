@@ -1,13 +1,15 @@
 import Logger from '../utils/logger.js'
 
 export default () => {
-  const start = (player, monster) => {
-    player.hitTillDeath(monster).subscribe(
-      () => { player.hit(monster) },
+  const start = (store) => {
+    store.newMonster()
+    store.player.hitTillDeath(store.monster).subscribe(
+      () => { store.player.hit(store.monster) },
       (err) => console.log(err),
       () => {
         Logger.log('player wins')
-        player.gainRewards(monster.rewards)
+        store.player.gainRewards(store.monster.rewards)
+        store.onNext()
       }
     )
   }
