@@ -1,5 +1,5 @@
 import {test} from 'tape'
-import Hero from '../src/js/core/hero.js'
+import Hero from './../../src/js/core/hero.js'
 
 test('gainRewards adds the rewards to the hero state', (assert) => {
   const hero = Hero()

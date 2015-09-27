@@ -1,2 +1,2 @@
-import './hero.js'
-import './monster.js'
+import './core/hero.js'
+import './core/monster.js'
