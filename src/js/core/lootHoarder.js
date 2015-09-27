@@ -1,12 +1,15 @@
+import WeaponGenerator from './weaponGenerator.js'
+
 const LootHoarder = () => {
   const baseGold = 5
+  const wpgen = WeaponGenerator()
 
   const goldForMonster = (level) => {
     return Math.round(Math.pow(1.35, level) * baseGold)
   }
 
   const itemsForMonster = (level) => {
-    return []
+    return [wpgen.randomize(level)]
   }
 
   const getChestForMonster = (level) => {
