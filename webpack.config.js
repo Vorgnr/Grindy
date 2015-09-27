@@ -3,8 +3,6 @@
 var path = require('path')
 var node_modules = path.resolve(__dirname, 'node_modules')
 
-// var production = process.argv.indexOf('--production') > -1
-
 module.exports = {
   entry: path.resolve(__dirname, 'src/js/index.js'),
   output: {
