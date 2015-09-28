@@ -4,16 +4,24 @@ import Fight from './fight.js'
 import Rx from 'rx'
 
 export default () => {
-  const spawnButton = document.querySelector('#spawn-monster')
-  const clicks = Rx.Observable.fromEvent(spawnButton, 'click')
   const player = Hero()
   let fight = Fight()
+  let appState = new Rx.Subject()
 
   return {
-    start: () => {
+    initState: () => {
+      return {
+        appState: appState,
+        initState: player.state
+      }
+    },
+    start: (clicks) => {
+      appState.onNext(player.state)
       clicks
-        .map(() => fight.start(player, Monster(player.state.level)))
-        .subscribe(() => fight = Fight())
+        .map(() => fight.start(player, Monster(player.state.level.current), appState))
+        .subscribe(() => {
+          fight = Fight()
+        })
     }
   }
 }
