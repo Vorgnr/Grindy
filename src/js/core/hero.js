@@ -59,7 +59,7 @@ export default () => {
     gainExp(rewards.exp)
     state.chest.gold += rewards.chest.gold
     state.chest.items.concat(rewards.chest.items)
-
+    Logger.log(rewards.chest.items)
     Logger.log(`New gold value ${state.chest.gold}`)
   }
 

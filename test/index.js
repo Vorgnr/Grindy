@@ -1,2 +1,5 @@
-import './hero.js'
-import './monster.js'
+import './../src/js/utils/extensions.js'
+import './core/hero.js'
+import './core/monster.js'
+import './core/weaponGenerator.js'
+import './utils/random.js'

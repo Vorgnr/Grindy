@@ -1,5 +1,5 @@
 import { test } from 'tape'
-import Monster from '../src/js/core/monster.js'
+import Monster from './../../src/js/core/monster.js'
 
 test('Upgraded monster should have a scaled life point', (assert) => {
   const monster = Monster(3)
