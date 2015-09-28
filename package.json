@@ -10,6 +10,8 @@
   "author": "vorgnr",
   "license": "MIT",
   "dependencies": {
+    "react": "^0.14.0-rc1",
+    "react-dom": "^0.14.0-rc1",
     "rx": "^3.1.2"
   },
   "devDependencies": {
@@ -21,8 +23,6 @@
     "faucet": "0.0.1",
     "file-loader": "^0.8.4",
     "node-sass": "^3.3.3",
-    "react": "^0.14.0-beta1",
-    "react-dom": "^0.14.0-beta1",
     "sass-loader": "^2.0.1",
     "standard": "^5.3.1",
     "style-loader": "^0.12.4",

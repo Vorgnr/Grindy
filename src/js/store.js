@@ -7,6 +7,7 @@ const Store = () => {
   const player = Hero(Storage.load())
   let gameState = new Rx.Subject()
   let monster = Monster()
+  monster.state.life = 0
 
   const self = {
     newMonster: () => self.monster = Monster(player.state.level.current),

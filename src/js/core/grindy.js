@@ -10,9 +10,12 @@ export default () => {
       return { gameState: store.gameState, initState: store.player.state }
     },
     start: (clicks) => {
-      store.onNext()
       clicks
-        .map(() => fight.start(store))
+        .map(() => {
+          if (store.monster.isDead()) {
+            fight.start(store)
+          }
+        })
         .subscribe()
     }
   }
