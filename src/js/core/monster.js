@@ -18,6 +18,7 @@ export default (level = 1) => {
     currentLife: () => state.life,
     receiveAttack: (damage) => state.life -= damage,
     isDead: () => state.life <= 0,
-    rewards
+    rewards,
+    state
   }
 }

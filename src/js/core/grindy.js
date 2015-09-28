@@ -1,27 +1,19 @@
-import Hero from './hero.js'
-import Monster from './monster.js'
 import Fight from './fight.js'
-import Rx from 'rx'
+import Store from '../store.js'
 
 export default () => {
-  const player = Hero()
+  const store = Store()
   let fight = Fight()
-  let appState = new Rx.Subject()
 
   return {
     initState: () => {
-      return {
-        appState: appState,
-        initState: player.state
-      }
+      return { gameState: store.gameState, initState: store.player.state }
     },
     start: (clicks) => {
-      appState.onNext(player.state)
+      store.onNext()
       clicks
-        .map(() => fight.start(player, Monster(player.state.level.current), appState))
-        .subscribe(() => {
-          fight = Fight()
-        })
+        .map(() => fight.start(store))
+        .subscribe()
     }
   }
 }

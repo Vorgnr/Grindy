@@ -40,16 +40,16 @@ export default () => {
     Logger.log(`gz you are level ${state.level.current}`)
   }
 
-  const hitTillDeath = (target) => {
+  const hitTillDeath = (monster) => {
     return Rx.Observable
       .interval(attackSpeed / state.ias)
-      .takeWhile(() => !target.isDead())
+      .takeWhile(() => !monster.isDead())
   }
 
-  const hit = (target) => {
+  const hit = (monster) => {
     Logger.log(`hit monster for ${damage} damage.`)
-    target.receiveAttack(damage)
-    Logger.log(`monster life's : ${target.currentLife()} hp.`)
+    monster.receiveAttack(damage)
+    Logger.log(`monster life's : ${monster.currentLife()} hp.`)
   }
 
   const gainRewards = (rewards) => {
