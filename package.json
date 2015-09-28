@@ -1,15 +1,21 @@
 {
   "name": "Grindy",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "HTML5 Auto clicker RPG",
   "main": "src/index.js",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/Vorgnr/Grindy.git"
+  },
   "scripts": {
-    "test": "istanbul cover babel-node test/index.js | faucet",
+    "test": "babel-node test/index.js | faucet",
     "start": "webpack-dev-server --hot --inline"
   },
   "author": "vorgnr",
   "license": "MIT",
   "dependencies": {
+    "react": "^0.14.0-rc1",
+    "react-dom": "^0.14.0-rc1",
     "rx": "^3.1.2"
   },
   "devDependencies": {
@@ -20,9 +26,9 @@
     "css-loader": "^0.19.0",
     "faucet": "0.0.1",
     "file-loader": "^0.8.4",
-    "istanbul": "^0.3.20",
     "node-sass": "^3.3.3",
     "sass-loader": "^2.0.1",
+    "standard": "^5.3.1",
     "style-loader": "^0.12.4",
     "tape": "^4.2.0",
     "webpack": "^1.12.2",
