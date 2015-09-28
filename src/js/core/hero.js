@@ -5,8 +5,8 @@ export default (state) => {
   let damage = 1
   const attackSpeed = 1 * 1000
 
-  if (!state) {
-    state = {
+  if (state.pseudo !== 'undefined') {
+    Object.assign(state, {
       ias: 10,
       chest: {
         gold: 0,
@@ -19,7 +19,7 @@ export default (state) => {
         xpToLevelUp: 100,
         totalXpToLevelUp: 100
       }
-    }
+    })
   }
 
   const expRequired = (level) => Math.pow(level, 2) * 100

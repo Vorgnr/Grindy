@@ -4,7 +4,12 @@ import Hero from './core/hero.js'
 import Monster from './core/monster.js'
 
 const Store = () => {
-  const player = Hero(Storage.load())
+  let loadedGame = Storage.load()
+  if (!loadedGame) {
+    const pseudo = window.prompt('Ton pseudo (sinon tu seras Jean-Paul) : ') || 'Jean-Paul'
+    loadedGame = { pseudo }
+  }
+  const player = Hero(loadedGame)
   let gameState = new Rx.Subject()
   let monster = Monster()
   monster.state.life = 0
