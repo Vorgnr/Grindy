@@ -4,15 +4,20 @@ import Weapon from './weapon.js'
 export default () => {
   const minSpeed = 0.5
   const maxSpeed = 2.5
-  const baseDps = 2
+  const baseDps = 50
+  const damageRangeFork = { min: 0.10, max: 0.15 }
+  const quality = { min: 0.85, max: 1.15 }
 
   const createSpeed = () => Random.between(minSpeed, maxSpeed).fixed(2)
+
+  const qualityRate = () => Random.between(quality.min, quality.max)
   const getDpsByLevel = (level) => {
-    return ((Math.pow(1.35, level) + baseDps) * damageRangeRatio()).fixed(2)
+    return ((Math.pow(1.35, level) + baseDps) * qualityRate()).fixed(2)
   }
+
   const getAverageDamage = (dps, speed) => Math.round(dps / speed)
   const getDamageRange = (averageDamage) => {
-    const ratio = Random.between(0.10, 0.15)
+    const ratio = Random.between(damageRangeFork.min, damageRangeFork.max)
     const damageSegment = Math.round(ratio * averageDamage)
     return {
       min: averageDamage - damageSegment,
@@ -20,12 +25,12 @@ export default () => {
     }
   }
 
-  const damageRangeRatio = () => Random.between(0.85, 1.15)
-
   const randomize = (level) => {
-    const dps = getDpsByLevel(level)
+    const initialDps = getDpsByLevel(level)
     const speed = createSpeed()
-    const damageRange = getDamageRange(getAverageDamage(dps, speed))
+    const averageDamage = getAverageDamage(initialDps, speed)
+    const damageRange = getDamageRange(averageDamage)
+    const dps = (averageDamage * speed).fixed()
 
     const weaponStats = {
       dps,
