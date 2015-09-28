@@ -57,7 +57,7 @@ export default (state) => {
   const gainRewards = (rewards) => {
     gainExp(rewards.exp)
     state.chest.gold += rewards.chest.gold
-    state.chest.items.concat(rewards.chest.items)
+    state.chest.items = state.chest.items.concat(rewards.chest.items)
     Logger.log(rewards.chest.items)
     Logger.log(`New gold value ${state.chest.gold}`)
   }
