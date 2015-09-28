@@ -1,6 +1,11 @@
 import React from 'react'
 
 export class Menu extends React.Component {
+  static propTypes = {
+    level: React.PropTypes.number,
+    percent: React.PropTypes.number
+  }
+
   render () {
     const styles = {
       width: `${this.props.percent}%`

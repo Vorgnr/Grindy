@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Menu} from './menu.js'
 import combineLatestObj from '../utils/combineLatestObj'
 
-export function subscribe (WrappedComponent, streamMap, initialState) {
+export function subscribe (streamMap, initialState) {
   const stateStream = combineLatestObj(streamMap)
 
   class Subscribe extends Component {
@@ -30,6 +30,16 @@ export function subscribe (WrappedComponent, streamMap, initialState) {
 }
 
 export class GrindyDOM extends React.Component {
+  static propTypes = {
+    player: React.PropTypes.shape({
+      level: React.PropTypes.shape({
+        current: React.PropTypes.number,
+        currentXp: React.PropTypes.number,
+        xpToLevelUp: React.PropTypes.number
+      })
+    })
+  }
+
   render () {
     return (
       <div>
