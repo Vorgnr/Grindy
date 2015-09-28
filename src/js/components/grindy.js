@@ -10,7 +10,7 @@ export default (props) => {
         </button>
         {JSON.stringify(props, null, 2)}
       </div>
-      <Menu level={props.player.level.current} percent={(props.player.level.currentXp / props.player.level.xpToLevelUp) * 100}/>
+      <Menu level={props.player.level.current} currentXp={props.player.level.currentXp} xpToLevelUp={props.player.level.xpToLevelUp} />
     </div>
   )
 }
