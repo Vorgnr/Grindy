@@ -4,9 +4,11 @@ import Logger from '../utils/logger.js'
 export default (state) => {
   let damage = 1
   const attackSpeed = 1 * 1000
+  const pseudo = state.pseudo
 
-  if (state.pseudo !== 'undefined') {
-    Object.assign(state, {
+  if (state.new) {
+    state = {
+      pseudo,
       ias: 10,
       chest: {
         gold: 0,
@@ -19,7 +21,7 @@ export default (state) => {
         xpToLevelUp: 100,
         totalXpToLevelUp: 100
       }
-    })
+    }
   }
 
   const expRequired = (level) => Math.pow(level, 2) * 100

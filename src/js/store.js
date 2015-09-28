@@ -7,7 +7,7 @@ const Store = () => {
   let loadedGame = Storage.load()
   if (!loadedGame) {
     const pseudo = window.prompt('Ton pseudo (sinon tu seras Jean-Paul) : ') || 'Jean-Paul'
-    loadedGame = { pseudo }
+    loadedGame = { pseudo, new: true }
   }
   const player = Hero(loadedGame)
   let gameState = new Rx.Subject()
