@@ -6,10 +6,7 @@ export default () => {
   const attackSpeed = 1 * 1000
 
   let state = {
-    ias: 100,
-    exp: 0,
-    expEarnedInLevel: 0,
-    expToLevelUp: 200,
+    ias: 10,
     chest: {
       gold: 0,
       items: []
@@ -18,18 +15,18 @@ export default () => {
       current: 1,
       totalXp: 0,
       currentXp: 0,
-      xpToLevelUp: 200,
-      totalXpToLevelUp: 200
+      xpToLevelUp: 100,
+      totalXpToLevelUp: 100
     }
   }
 
-  const expRequired = (level) => Math.pow(level + 1, 2.4) * 200
+  const expRequired = (level) => Math.pow(level, 2) * 100
 
   const gainExp = (exp) => {
     state.level.totalXp += exp
     if (state.level.totalXpToLevelUp <= state.level.totalXp) {
+      state.level.currentXp = Math.abs(state.level.totalXpToLevelUp - state.level.totalXp)
       levelUp()
-      state.level.currentXp = state.level.totalXp - state.level.totalXpToLevelUp
       state.level.xpToLevelUp = expRequired(state.level.current) - state.level.totalXp
     } else {
       state.level.currentXp += exp
@@ -39,8 +36,8 @@ export default () => {
   const levelUp = () => {
     state.level.current++
     damage++
-    state.totalXpToLevelUp = expRequired(state.level)
-    Logger.log(`gz you are level ${state.level}`)
+    state.level.totalXpToLevelUp = expRequired(state.level.current)
+    Logger.log(`gz you are level ${state.level.current}`)
   }
 
   const hitTillDeath = (target) => {
