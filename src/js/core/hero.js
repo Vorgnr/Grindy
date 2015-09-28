@@ -1,22 +1,24 @@
 import Rx from 'rx'
 import Logger from '../utils/logger.js'
 
-export default () => {
+export default (state) => {
   let damage = 1
   const attackSpeed = 1 * 1000
 
-  let state = {
-    ias: 10,
-    chest: {
-      gold: 0,
-      items: []
-    },
-    level: {
-      current: 1,
-      totalXp: 0,
-      currentXp: 0,
-      xpToLevelUp: 100,
-      totalXpToLevelUp: 100
+  if (!state) {
+    state = {
+      ias: 10,
+      chest: {
+        gold: 0,
+        items: []
+      },
+      level: {
+        current: 1,
+        totalXp: 0,
+        currentXp: 0,
+        xpToLevelUp: 100,
+        totalXpToLevelUp: 100
+      }
     }
   }
 
