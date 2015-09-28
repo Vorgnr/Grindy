@@ -39,7 +39,7 @@ export class GrindyDOM extends React.Component {
           </button>
           {JSON.stringify(this.props, null, 2)}
         </div>
-        <Menu />
+        <Menu level={this.props.player.level.current} percent={(this.props.player.level.currentXp / this.props.player.level.xpToLevelUp) * 100}/>
       </div>
     )
   }

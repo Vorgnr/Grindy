@@ -9,11 +9,16 @@ export default () => {
   let appState = new Rx.Subject()
 
   return {
-    initState: () => appState,
+    initState: () => {
+      return {
+        appState: appState,
+        initState: player.state
+      }
+    },
     start: (clicks) => {
       appState.onNext(player.state)
       clicks
-        .map(() => fight.start(player, Monster(player.state.level), appState))
+        .map(() => fight.start(player, Monster(player.state.level.current), appState))
         .subscribe(() => {
           fight = Fight()
         })
