@@ -8,7 +8,6 @@ export class Grindy extends Component {
   }
 
   render () {
-    // console.debug(JSON.stringify(this.props, null, 2))
     return (
       <div>
         <div className='game-layer'>

@@ -1,7 +1,7 @@
 import Logger from '../utils/logger.js'
 
-export default () => {
-  const expRequired = (level) => Math.pow(level, 2) * 100
+export default (state) => {
+  const expRequired = (level) => Math.pow(level + 1, 2.6) * 100
 
   const gainExp = (state, xp) => {
     state.totalXp += xp
@@ -43,8 +43,8 @@ export default () => {
     return state
   }
 
-  const initialState = () => {
-    return {
+  const initialState = (state) => {
+    return Object.assign({
       pseudo: '',
       ias: 10,
       damage: 1,
@@ -56,8 +56,11 @@ export default () => {
       totalXp: 0,
       currentXp: 0,
       xpToLevelUp: 100,
-      totalXpToLevelUp: 100
-    }
+      totalXpToLevelUp: 100,
+      monster: {
+        life: 5
+      }
+    }, state)
   }
 
   return { gainRewards, hit, gainExp, expRequired, initialState }
