@@ -4,25 +4,42 @@ import Hero from './core/hero.js'
 import Monster from './core/monster.js'
 
 const Store = () => {
-  let loadedGame = Storage.load()
-  if (!loadedGame) {
-    const pseudo = window.prompt('Ton pseudo (sinon tu seras Jean-Paul) : ') || 'Jean-Paul'
-    loadedGame = { pseudo, new: true }
+  let gameState = {
+    pseudo: '',
+    ias: 10,
+    damage: 1,
+    chest: {
+      gold: 0,
+      items: []
+    },
+    level: {
+      current: 1,
+      totalXp: 0,
+      currentXp: 0,
+      xpToLevelUp: 100,
+      totalXpToLevelUp: 100
+    }
   }
-  const player = Hero(loadedGame)
-  let gameState = new Rx.Subject()
+
+  // let loadedGame = Storage.load()
+  // if (!loadedGame) {
+  //   const pseudo = window.prompt('Ton pseudo (sinon tu seras Jean-Paul) : ') || 'Jean-Paul'
+  //   loadedGame = { pseudo, new: true }
+  // }
+  const player = Hero()
+  let gameStream = new Rx.Subject()
   let monster = Monster()
   monster.state.life = 0
 
   const self = {
     newMonster: () => self.monster = Monster(player.state.level.current),
     onNext: () => {
-      gameState.onNext(player.state)
+      gameStream.onNext(player.state)
       Storage.save(player.state)
     },
     player,
     monster,
-    gameState
+    gameStream
   }
 
   return self

@@ -9,6 +9,7 @@
   },
   "scripts": {
     "test": "babel-node test/index.js | faucet",
+    "test-debug": "babel-node test/index.js",
     "start": "webpack-dev-server --hot --inline"
   },
   "author": "vorgnr",

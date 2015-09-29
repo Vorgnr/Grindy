@@ -1,68 +1,56 @@
 import Rx from 'rx'
 import Logger from '../utils/logger.js'
 
-export default (state) => {
-  let damage = 1
+export default () => {
   const attackSpeed = 1 * 1000
-  const pseudo = state.pseudo
-
-  if (state.new) {
-    state = {
-      pseudo,
-      ias: 10,
-      chest: {
-        gold: 0,
-        items: []
-      },
-      level: {
-        current: 1,
-        totalXp: 0,
-        currentXp: 0,
-        xpToLevelUp: 100,
-        totalXpToLevelUp: 100
-      }
-    }
-  }
 
   const expRequired = (level) => Math.pow(level, 2) * 100
 
-  const gainExp = (exp) => {
-    state.level.totalXp += exp
-    if (state.level.totalXpToLevelUp <= state.level.totalXp) {
-      state.level.currentXp = Math.abs(state.level.totalXpToLevelUp - state.level.totalXp)
-      levelUp()
-      state.level.xpToLevelUp = expRequired(state.level.current) - state.level.totalXp
+  const gainExp = (state, xp) => {
+    state.totalXp += xp
+    if (state.totalXpToLevelUp <= state.totalXp) {
+      state.currentXp = Math.abs(state.totalXpToLevelUp - state.totalXp)
+      levelUp(state)
+      state.xpToLevelUp = expRequired(state.level) - state.totalXp
     } else {
-      state.level.currentXp += exp
+      state.currentXp += xp
     }
+
+    return state
   }
 
-  const levelUp = () => {
-    state.level.current++
-    damage++
-    state.level.totalXpToLevelUp = expRequired(state.level.current)
-    Logger.log(`gz you are level ${state.level.current}`)
+  const levelUp = (state) => {
+    state.level++
+    state.damage++
+    state.totalXpToLevelUp = expRequired(state.level)
+    Logger.log(`gz you are level ${state.level}`)
+
+    return state
   }
 
-  const hitTillDeath = (monster) => {
+  const hitTillDeath = (state) => {
     return Rx.Observable
       .interval(attackSpeed / state.ias)
-      .takeWhile(() => !monster.isDead())
+      .takeWhile(() => !state.monster.isDead())
   }
 
-  const hit = (monster) => {
-    Logger.log(`hit monster for ${damage} damage.`)
-    monster.receiveAttack(damage)
-    Logger.log(`monster life's : ${monster.currentLife()} hp.`)
+  const hit = (state) => {
+    Logger.log(`hit monster for ${state.damage} damage.`)
+    state.monster.receiveAttack(state.damage)
+    Logger.log(`monster life's : ${state.monster.currentLife()} hp.`)
+
+    return state
   }
 
-  const gainRewards = (rewards) => {
-    gainExp(rewards.exp)
+  const gainRewards = (state, rewards) => {
+    state.level = gainExp(state.level, rewards.exp)
     state.chest.gold += rewards.chest.gold
     state.chest.items = state.chest.items.concat(rewards.chest.items)
     Logger.log(rewards.chest.items)
     Logger.log(`New gold value ${state.chest.gold}`)
+
+    return state
   }
 
-  return { hitTillDeath, gainRewards, state, hit, gainExp }
+  return { hitTillDeath, gainRewards, hit, gainExp, expRequired }
 }
