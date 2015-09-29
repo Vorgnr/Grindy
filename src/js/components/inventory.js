@@ -10,9 +10,11 @@ export class Inventory extends React.Component {
     }
 
     items () {
-      return this.state.chest.items.map((item, index) => {
-        return <div className='inventory-item' key={index}> { item.state.dps } </div>
-      })
+      if (typeof this.state.chest.items !== 'undefined') {
+        return this.state.chest.items.map((item, index) => {
+          return <div className='inventory-item' key={index}> { item.state.dps } </div>
+        })
+      }
     }
 
     render () {
