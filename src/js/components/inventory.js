@@ -11,7 +11,7 @@ export class Inventory extends React.Component {
 
     items () {
       return this.state.chest.items.map((item, index) => {
-        return <li key={index}> { item.state.dps } </li>
+        return <div className='inventory-item' key={index}> { item.state.dps } </div>
       })
     }
 
@@ -19,9 +19,9 @@ export class Inventory extends React.Component {
       return (
         <div className='inventory'>
           <span> { this.state.chest.gold } </span>
-          <ul>
+          <div>
             { this.items() }
-          </ul>
+          </div>
         </div>
       )
     }
