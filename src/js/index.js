@@ -8,10 +8,6 @@ import ReactDOM from 'react-dom'
 import Rx from 'rx'
 
 const game = Grindy()
-const { gameState, initState } = game.initState()
-const App = subscribe({ player: gameState }, { player: initState })
+const { gameStream, initState } = game.initState()
+const App = subscribe({ player: gameStream }, { player: initState })
 ReactDOM.render(<App />, document.getElementById('grindy'))
-
-const spawnButton = document.querySelector('#spawn-monster')
-const clicks = Rx.Observable.fromEvent(spawnButton, 'click')
-game.start(clicks)
