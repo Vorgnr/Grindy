@@ -22,6 +22,9 @@ const Store = () => {
     .map(() => player.hit(gameState))
     .doOnCompleted(() => {
       finishFightSubject.onNext()
+      setTimeout(() => {
+        newMonsterSubject.onNext()
+      }, 1000)
       Storage.save(gameState)
     })
   }
