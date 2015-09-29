@@ -1,6 +1,6 @@
 $game-layer-height: 80vh;
-$hud-container-height: 17vh;
-$experience-bar-height: 3vh;
+$hud-container-height: 18vh;
+$experience-bar-height: 2vh;
 
 $hit-points-width: 20%;
 
@@ -70,19 +70,11 @@ canvas {
 .experience-bar {
   width: $full-view-with;
   height: $experience-bar-height;
-  position: relative;
-  text-align: center;
-  &--current {
-    height: $full;
-    background-color: $experience-bar-color;
-  }
+  // background-color: $experience-bar-color;
+}
 
-  &--numbers {
-    top: 0;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    position: absolute;
-    height: $full;
-  }
+progress[value] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }

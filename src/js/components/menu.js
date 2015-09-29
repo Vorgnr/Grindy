@@ -9,15 +9,13 @@ export default (props) => {
     <div>
       <div className='hud-container'>
         <div className='hit-points'>
-          Level: <strong>{props.level}</strong>
+          <div className='life'></div>
+          <div className='mana'></div>
         </div>
         <div className='skills-container'></div>
         <div className='side-menu'></div>
       </div>
-      <div className='experience-bar'>
-        <div className='experience-bar--current' style={styles}></div>
-        <div className='experience-bar--numbers'>{`${props.currentXp} / ${props.xpToLevelUp}`}</div>
-      </div>
+      <progress className='experience-bar' value={props.currentXp} max={props.xpToLevelUp}></progress>
     </div>
   )
 }
