@@ -1,5 +1,5 @@
 import React from 'react'
-import Menu from './menu.js'
+import { Menu } from './menu.js'
 
 export default (props) => {
   delete props.player.chest.items
@@ -14,7 +14,8 @@ export default (props) => {
           {JSON.stringify(props, null, 2)}
         </pre>
       </div>
-      <Menu currentXp={props.player.level.currentXp} xpToLevelUp={props.player.level.xpToLevelUp} />
+      <Menu currentXp={props.player.level.currentXp} xpToLevelUp={props.player.level.xpToLevelUp}
+        chest={ props.player.chest } />
     </div>
   )
 }
