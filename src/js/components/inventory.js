@@ -2,7 +2,6 @@ import React from 'react'
 
 export class Inventory extends React.Component {
     constructor (props) {
-      console.log(props)
       super(props)
       this.state = {
         visible: false,

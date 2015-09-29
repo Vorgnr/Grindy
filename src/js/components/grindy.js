@@ -1,6 +1,5 @@
 import React from 'react'
-import Menu from './menu.js'
-import { Inventory } from './inventory.js'
+import { Menu } from './menu.js'
 
 export default (props) => {
   return (
@@ -11,9 +10,8 @@ export default (props) => {
         </button>
         { JSON.stringify(props, null, 2) }
       </div>
-      <Menu level={ props.player.level.current }
+      <Menu chest={ props.player.chest } level={ props.player.level.current }
             percent={ (props.player.level.currentXp / props.player.level.xpToLevelUp) * 100 } />
-      <Inventory chest={ props.player.chest } />
     </div>
   )
 }
