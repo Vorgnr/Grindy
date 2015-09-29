@@ -1,9 +1,6 @@
-import Rx from 'rx'
 import Logger from '../utils/logger.js'
 
 export default () => {
-  const attackSpeed = 1 * 1000
-
   const expRequired = (level) => Math.pow(level, 2) * 100
 
   const gainExp = (state, xp) => {
@@ -28,12 +25,6 @@ export default () => {
     return state
   }
 
-  const hitTillDeath = (state) => {
-    return Rx.Observable
-      .interval(attackSpeed / state.ias)
-      .takeWhile(() => !state.monster.isDead())
-  }
-
   const hit = (state) => {
     Logger.log(`hit monster for ${state.damage} damage.`)
     state.monster.life = state.monster.life - state.damage
@@ -52,5 +43,22 @@ export default () => {
     return state
   }
 
-  return { hitTillDeath, gainRewards, hit, gainExp, expRequired }
+  const initialState = () => {
+    return {
+      pseudo: '',
+      ias: 10,
+      damage: 1,
+      chest: {
+        gold: 0,
+        items: []
+      },
+      level: 1,
+      totalXp: 0,
+      currentXp: 0,
+      xpToLevelUp: 100,
+      totalXpToLevelUp: 100
+    }
+  }
+
+  return { gainRewards, hit, gainExp, expRequired, initialState }
 }
