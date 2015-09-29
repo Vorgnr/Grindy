@@ -36,14 +36,14 @@ export default () => {
 
   const hit = (state) => {
     Logger.log(`hit monster for ${state.damage} damage.`)
-    state.monster.receiveAttack(state.damage)
-    Logger.log(`monster life's : ${state.monster.currentLife()} hp.`)
+    state.monster.life = state.monster.life - state.damage
+    Logger.log(`monster life's : ${state.monster.life} hp.`)
 
     return state
   }
 
   const gainRewards = (state, rewards) => {
-    state.level = gainExp(state.level, rewards.exp)
+    state = gainExp(state, rewards.xp)
     state.chest.gold += rewards.chest.gold
     state.chest.items = state.chest.items.concat(rewards.chest.items)
     Logger.log(rewards.chest.items)
