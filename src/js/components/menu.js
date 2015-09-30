@@ -5,11 +5,7 @@ export class Menu extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      chest: props.chest,
-      level: props.level,
-      isInventoryVisible: false,
-      currentXp: props.currentXp,
-      xpToLevelUp: props.xpToLevelUp
+      isInventoryVisible: false
     }
   }
 
@@ -22,15 +18,16 @@ export class Menu extends React.Component {
       <div>
         <div className='hud-container'>
           <div className='hit-points'>
-            Level: <strong>{this.state.level}</strong>
+            <div className='life'></div>
+            <div className='mana'></div>
           </div>
           <div className='skills-container'></div>
           <div className='side-menu'>
             <button onClick={ ::this.toggleInventory }> i </button>
-            { this.state.isInventoryVisible ? <Inventory chest={this.state.chest} /> : '' }
+            { this.state.isInventoryVisible ? <Inventory chest={this.props.chest} /> : '' }
           </div>
         </div>
-        <progress className='experience-bar' value={this.state.currentXp} max={this.state.xpToLevelUp}></progress>
+        <progress className='experience-bar' value={this.props.currentXp} max={this.props.xpToLevelUp}></progress>
       </div>
     )
   }

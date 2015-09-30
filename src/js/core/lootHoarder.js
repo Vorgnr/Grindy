@@ -14,7 +14,7 @@ const LootHoarder = () => {
 
   const getChestForMonster = (level) => {
     let gold = goldForMonster(level)
-    let items = itemsForMonster(level)
+    let items = []
     return { gold, items }
   }
 

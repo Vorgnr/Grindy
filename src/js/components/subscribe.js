@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import combineLatestObj from '../utils/combineLatestObj'
-import Grindy from './grindy.js'
+import { Grindy } from './grindy.js'
 
 export default (streamMap, initialState) => {
   const stateStream = combineLatestObj(streamMap)
