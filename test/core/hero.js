@@ -1,7 +1,7 @@
 import {test} from 'tape'
 import Hero from './../../src/js/core/hero.js'
 
-test('gainExp update the totalXp value of the hero', (assert) => {
+test('Hero gainExp update the totalXp value of the hero', (assert) => {
   const hero = Hero()
   const expected = initGameState({ totalXp: 150 })
   const actual = hero.gainExp(initGameState(), 150)
@@ -10,7 +10,7 @@ test('gainExp update the totalXp value of the hero', (assert) => {
   assert.end()
 })
 
-test('gainExp update the currentXp value of the hero', (assert) => {
+test('Hero gainExp update the currentXp value of the hero', (assert) => {
   const hero = Hero()
   const expected = initGameState({ currentXp: 50 })
   const actual = hero.gainExp(initGameState(), 50)
@@ -19,7 +19,7 @@ test('gainExp update the currentXp value of the hero', (assert) => {
   assert.end()
 })
 
-test('gainExp keep overflown exp in currentXp', (assert) => {
+test('Hero gainExp keep overflown exp in currentXp', (assert) => {
   const hero = Hero()
   const expected = initGameState({
     currentXp: 50
@@ -33,7 +33,7 @@ test('gainExp keep overflown exp in currentXp', (assert) => {
   assert.end()
 })
 
-test('gainExp add 1 to level when totalXpToLevelUp is inferior to totalXp', (assert) => {
+test('Hero gainExp add 1 to level when totalXpToLevelUp is inferior to totalXp', (assert) => {
   const hero = Hero()
   const expected = initGameState({
     level: 2
@@ -47,7 +47,7 @@ test('gainExp add 1 to level when totalXpToLevelUp is inferior to totalXp', (ass
   assert.end()
 })
 
-test('gainRewards adds the rewards to the hero state', (assert) => {
+test('Hero gainRewards adds the rewards to the hero state', (assert) => {
   const hero = Hero()
   const rewards = {
     xp: 300,
@@ -70,16 +70,17 @@ test('gainRewards adds the rewards to the hero state', (assert) => {
   assert.end()
 })
 
-test('gainRewards adds the rewards to the hero state', (assert) => {
+test('Hero hit removes the hero damage from monster lifepool', (assert) => {
   const hero = Hero()
   const expected = initGameState({
     monster: {
+      level: 1,
       life: 4
     }
   })
   const actual = hero.hit(initGameState())
 
-  assert.equal(actual.life, expected.life)
+  assert.deepEqual(actual, expected)
   assert.end()
 })
 
@@ -98,6 +99,7 @@ const initGameState = (state) => {
     xpToLevelUp: 1000,
     totalXpToLevelUp: 1500,
     monster: {
+      level: 1,
       life: 5
     }
   }, state)
