@@ -18,7 +18,7 @@ export class Inventory extends React.Component {
 
   render () {
     return (
-      <div className='inventory'>
+      <div className='tool-menu inventory'>
         <span>{ this.props.chest.gold }</span>
         <div>
           { this.items() }
