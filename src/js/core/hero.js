@@ -1,7 +1,7 @@
 import Logger from '../utils/logger.js'
 
 export default (state) => {
-  const expRequired = (level) => Math.pow(level + 1, 2.6) * 100
+  const expRequired = (level) => Math.round(Math.pow(level + 1, 2.6) * 100)
 
   const gainExp = (state, xp) => {
     state.totalXp += xp
