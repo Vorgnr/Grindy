@@ -3,6 +3,15 @@ import {Menu} from './menu.js'
 import * as Actions from '../actions.js'
 
 export class Grindy extends Component {
+  static propTypes = {
+    player: React.PropTypes.shape({
+      level: React.PropTypes.number,
+      currentXp: React.PropTypes.number,
+      xpToLevelUp: React.PropTypes.number,
+      chest: React.PropTypes.object
+    })
+  }
+
   click (event) {
     Actions.newMonsterSubject.onNext()
   }

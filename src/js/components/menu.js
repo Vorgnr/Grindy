@@ -2,6 +2,12 @@ import React from 'react'
 import { Inventory } from './inventory.js'
 
 export class Menu extends React.Component {
+  static propTypes = {
+    currentXp: React.PropTypes.number,
+    xpToLevelUp: React.PropTypes.number,
+    chest: React.PropTypes.object
+  }
+
   constructor (props) {
     super(props)
     this.state = {
