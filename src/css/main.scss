@@ -69,19 +69,20 @@ canvas {
     .tool-menu {
       position: absolute;
       z-index: 1;
+      padding: 10px;
     }
 
     .player-stats {
-      top: 20%;
-      right: 40%;
-      width: 300px;
+      bottom: 21vh;
+      left: 1vw;
+      width: 15vw;
       background-color: $inventory-background;
     }
 
     .inventory {
-      top: 20%;
-      right: 20%;
-      width: 300px;
+      bottom: 21vh;
+      right: 1vw;
+      width: 15vw;
       background-color: $inventory-background;
 
       .inventory-item {
