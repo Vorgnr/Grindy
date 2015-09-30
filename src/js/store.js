@@ -1,6 +1,6 @@
 import Rx from 'rx'
 import Storage from './utils/storage.js'
-import { finishFightSubject, newMonsterSubject } from './actions.js'
+import { finishFightSubject, newMonsterSubject, attackSubject } from './actions.js'
 import Hero from './core/hero.js'
 import Monster from './core/monster.js'
 
@@ -19,7 +19,10 @@ const Store = () => {
     return Rx.Observable
     .interval(1000 / gameState.ias)
     .takeWhile(() => gameState.monster.life > 0)
-    .map(() => player.hit(gameState))
+    .map(() => {
+      attackSubject.onNext(gameState.damage)
+      return player.hit(gameState)
+    })
     .doOnCompleted(() => {
       finishFightSubject.onNext()
       setTimeout(() => newMonsterSubject.onNext(), 1000)
