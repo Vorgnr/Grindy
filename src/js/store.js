@@ -8,7 +8,7 @@ const Store = () => {
   let loadedGame = Storage.load()
   if (!loadedGame) {
     const pseudo = window.prompt('Ton pseudo (sinon tu seras Jean-Paul) : ') || 'Jean-Paul'
-    loadedGame = { pseudo, new: true }
+    loadedGame = { pseudo }
   }
 
   const player = Hero()
@@ -22,15 +22,13 @@ const Store = () => {
     .map(() => player.hit(gameState))
     .doOnCompleted(() => {
       finishFightSubject.onNext()
-      setTimeout(() => {
-        newMonsterSubject.onNext()
-      }, 1000)
+      setTimeout(() => newMonsterSubject.onNext(), 1000)
       Storage.save(gameState)
     })
   }
 
   const fightStream = finishFightSubject
-    .map(() => player.gainRewards(gameState, monster.rewards))
+    .map(() => player.gainRewards(gameState, monster.rewards(gameState.level)))
 
   const gameStream = newMonsterSubject
     .map(() => monster.newMonster(gameState))
