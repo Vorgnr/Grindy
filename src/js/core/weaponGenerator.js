@@ -8,6 +8,8 @@ export default () => {
   const damageRangeFork = { min: 0.10, max: 0.15 }
   const quality = { min: 0.85, max: 1.15 }
 
+  const weaponTypes = ['sword', 'axe', 'staff', 'hammer']
+
   const createSpeed = () => Random.between(minSpeed, maxSpeed).fixed(2)
 
   const qualityRate = () => Random.between(quality.min, quality.max)
@@ -31,8 +33,10 @@ export default () => {
     const averageDamage = getAverageDamage(initialDps, speed)
     const damageRange = getDamageRange(averageDamage)
     const dps = (averageDamage * speed).fixed()
+    const type = weaponTypes.getRandomValue()
 
     const weaponStats = {
+      type,
       dps,
       speed,
       damageRange

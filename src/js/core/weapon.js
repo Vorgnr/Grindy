@@ -1,5 +1,6 @@
 export default (arg) => {
   let state = {
+    type: arg.type,
     damageRange: {
       min: arg.damageRange.min,
       max: arg.damageRange.max
