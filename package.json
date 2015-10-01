@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "HTML5 Auto clicker RPG",
   "main": "src/index.js",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/Vorgnr/Grindy.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Vorgnr/Grindy.git"
   },
   "scripts": {
     "test": "babel-node test/index.js | faucet",
@@ -17,6 +17,7 @@
   "dependencies": {
     "react": "^0.14.0-rc1",
     "react-dom": "^0.14.0-rc1",
+    "react-motion": "^0.3.0",
     "rx": "^3.1.2"
   },
   "devDependencies": {

@@ -5,7 +5,6 @@ import Grindy from './core/grindy.js'
 import subscribe from './components/subscribe.js'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Rx from 'rx'
 
 const game = Grindy()
 const { gameStream, initState } = game.initState()

@@ -46,7 +46,7 @@ export default (state) => {
   const initialState = (state) => {
     return Object.assign({
       pseudo: '',
-      ias: 10,
+      ias: 5,
       damage: 1,
       chest: {
         gold: 0,
