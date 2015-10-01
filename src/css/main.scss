@@ -90,6 +90,17 @@ canvas {
         float:left;
         width: 25%;
         padding: 10px;
+
+        .weapon {
+          width: 25px;
+          height: 25px;
+          background-attachment: no-repeat;
+        }
+
+        .weapon.axe { background-image: url(../img/axe.svg); }
+        .weapon.hammer { background-image: url(../img/hammer.svg); }
+        .weapon.sword { background-image: url(../img/sword.svg); }
+        .weapon.staff { background-image: url(../img/staff.svg); }
       }
     }
 
