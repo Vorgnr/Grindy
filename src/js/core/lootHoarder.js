@@ -10,7 +10,7 @@ const LootHoarder = () => {
   }
 
   const itemsForMonster = (level) => {
-    if (Random.chance(10)) return [wpgen.randomize(level)]
+    if (Random.chance(100)) return [wpgen.randomize(level)]
     else return []
   }
 

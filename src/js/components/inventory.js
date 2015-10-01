@@ -1,4 +1,5 @@
 import React from 'react'
+import Weapon from './weapon.js'
 
 export class Inventory extends React.Component {
   static propTypes = {
@@ -11,7 +12,9 @@ export class Inventory extends React.Component {
   items () {
     if (typeof this.props.chest.items !== 'undefined') {
       return this.props.chest.items.map((item, index) => {
-        return <div className='inventory-item' key={index}> { item.state.dps } </div>
+        return <div className='inventory-item' key={index}>
+          <Weapon weapon={ item.state }/>
+        </div>
       })
     }
   }
