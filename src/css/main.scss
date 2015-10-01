@@ -12,6 +12,7 @@ $debug-color: #A4D9EB;
 
 $experience-bar-color: green;
 $inventory-background: white;
+$bloody-red-color: #af111c;
 
 $full: 100%;
 
@@ -42,7 +43,7 @@ canvas {
       height: $full;
       width: 50%;
       float: left;
-      background-color: red;
+      background-color: $bloody-red-color;
     }
 
     .mana {
@@ -98,7 +99,7 @@ canvas {
 .experience-bar {
   width: $full-view-with;
   height: $experience-bar-height;
-  // background-color: $experience-bar-color;
+  background-color: $experience-bar-color;
 }
 
 progress[value] {
@@ -106,3 +107,6 @@ progress[value] {
      -moz-appearance: none;
           appearance: none;
 }
+
+progress.life::-moz-progress-bar { background: $bloody-red-color }
+progress.life::-webkit-progress-value { background: $bloody-red-color }

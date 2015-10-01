@@ -7,9 +7,11 @@ export default () => {
   })
 
   const newMonster = (state) => {
+    const initialLife = scaleValue(state.level, 5)
     state.monster = {
       level: state.level,
-      life: scaleValue(state.level, 5)
+      life: initialLife,
+      totalLife: initialLife
     }
     return state
   }

@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
-import {Menu} from './menu.js'
+import Menu from './menu.js'
+import Monster from './monster.js'
 import * as Actions from '../actions.js'
 
 export class Grindy extends Component {
   static propTypes = {
-    player: React.PropTypes.object
+    player: React.PropTypes.shape({
+      monster: React.PropTypes.object
+    })
   }
 
   click (event) {
@@ -18,7 +21,7 @@ export class Grindy extends Component {
           <button type='button' name='spawn-monster' id='spawn-monster' onClick={::this.click}>
             Spawn Bad Guy
           </button>
-
+          <Monster monster={this.props.player.monster} />
         </div>
         <Menu player={this.props.player} />
       </div>

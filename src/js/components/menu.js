@@ -2,7 +2,7 @@ import React from 'react'
 import { Inventory } from './inventory.js'
 import { PlayerStats } from './playerStats.js'
 
-export class Menu extends React.Component {
+export default class Menu extends React.Component {
   static propTypes = {
     player: React.PropTypes.shape({
       pseudo: React.PropTypes.string,
