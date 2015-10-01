@@ -20,7 +20,7 @@ const Store = () => {
     .interval(1000 / gameState.ias)
     .takeWhile(() => gameState.monster.life > 0)
     .map(() => {
-      attackSubject.onNext(gameState.damage)
+      attackSubject.onNext()
       return player.hit(gameState)
     })
     .doOnCompleted(() => {
